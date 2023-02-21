@@ -1,20 +1,22 @@
-import { async } from "@firebase/util";
-import { useState } from "react";
+// import { async } from "@firebase/util";
+import { useState,useContext } from "react";
 import { createAuthrWithUserEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../buttons/buttons.component";
 import './sign-in.styles.scss'
 import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
 import { SignInAuthrWithUserEmailAndPassword } from "../../utils/firebase/firebase.utils";
+import { Usercontext } from "../contexts/user.context";
 const defaultFormFields={
     email:'',
     password:'',
 }
 const SignInForm=()=>{
+    // const {setCurrentUser}=useContext(Usercontext)
     const [formFields,setFormFields]=useState(defaultFormFields);
     
-    const {displayName,email,password,confirmPassword}=formFields;
-    console.log(formFields)
+    const {email,password,}=formFields;
+   
 
     const handleChange=(event)=>{
         const {name,value}=event.target 
@@ -24,7 +26,9 @@ const SignInForm=()=>{
     const signInWithGoogle=async()=>{
         const {user}=await signInWithGooglePopup();
         alert(`Signed in as ${user.displayName}`)
-        const userRefDoc=createUserDocumentFromAuth(user);
+        
+        // const userRefDoc=createUserDocumentFromAuth(user);
+        // setCurrentUser(user)
     }
 
 
@@ -36,8 +40,9 @@ const SignInForm=()=>{
         
             try 
             {
-                const response=await SignInAuthrWithUserEmailAndPassword(email,password)
-                 console.log('sign in hua ye hai iske response',response)
+                const user=await SignInAuthrWithUserEmailAndPassword(email,password)
+                // setCurrentUser(user)
+                
             // await createUserDocumentFromAuth(response.user,{displayName})
             resetFormFields();
         }

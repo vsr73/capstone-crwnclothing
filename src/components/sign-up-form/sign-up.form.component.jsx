@@ -1,8 +1,9 @@
 import { async } from "@firebase/util";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import {signInWithGooglePopup} from '../../utils/firebase/firebase.utils'
 import {auth,createUserDocumentFromAuth,createAuthrWithUserEmailAndPassword} from '../../utils/firebase/firebase.utils'
+import { Usercontext } from "../contexts/user.context";
 // import { createAuthrWithUserEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import Button from "../buttons/buttons.component";
 import './sign-up.styles.scss'
@@ -12,22 +13,25 @@ const defaultFormFields={
     password:'',
     confirmPassword:''
 }
+
+
 const SignUpForm=()=>{
     const [formFields,setFormFields]=useState(defaultFormFields);
     
     const {displayName,email,password,confirmPassword}=formFields;
-    console.log(formFields)
+
+    //  const {setCurrentUser}=useContext(Usercontext)
     const handleChange=(event)=>{
         const {name,value}=event.target 
         setFormFields({...formFields,[name]:value})
     }
 
-    const logGoogleUser=async()=>{
-        const {user}=await signInWithGooglePopup();
+    // const logGoogleUser=async()=>{
+    //     const {user}=await signInWithGooglePopup();
         
-        //alert()
-        const userRefDoc=createUserDocumentFromAuth(user);
-    }
+    //     //alert()
+    //     const userRefDoc=createUserDocumentFromAuth(user);
+    // }
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
@@ -36,9 +40,11 @@ const SignUpForm=()=>{
             try 
             {
                 const response=await createAuthrWithUserEmailAndPassword(email,password)
-                 console.log(response)
-            await createUserDocumentFromAuth(response.user,{displayName})
+                
+            // const user=await createUserDocumentFromAuth(response.user,{displayName})
             resetFormFields();
+            // console.log('magic with the sign up user',user)
+            
         }
 
             catch (error) {
