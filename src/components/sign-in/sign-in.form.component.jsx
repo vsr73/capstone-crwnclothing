@@ -1,12 +1,10 @@
 // import { async } from "@firebase/util";
-import { useState,useContext } from "react";
-import { createAuthrWithUserEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
+import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-import Button from "../buttons/buttons.component";
+import Button,{Button_Type_Classes} from "../buttons/buttons.component";
 import './sign-in.styles.scss'
 import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
 import { SignInAuthrWithUserEmailAndPassword } from "../../utils/firebase/firebase.utils";
-import { Usercontext } from "../contexts/user.context";
 const defaultFormFields={
     email:'',
     password:'',
@@ -93,7 +91,7 @@ const SignInForm=()=>{
     
                     <Button  type='submit'>Sign In </Button>
     
-                    <Button type='button' buttonType='google'  onClick={signInWithGoogle}> Google Sign In </Button>
+                    <Button type='button' buttonType={Button_Type_Classes.google}  onClick={signInWithGoogle}> Google Sign In </Button>
                 </div>
             </form>
         </div>

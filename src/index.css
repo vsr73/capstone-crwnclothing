@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;1,400&display=swap');
+
+
 body {
   margin: 0;
   padding: 20px 40px;
@@ -7,6 +11,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -20,4 +26,9 @@ code {
 
 *{
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1,h2,h3,h4{
+  font-family: 'Poppins', sans-serif;
 }

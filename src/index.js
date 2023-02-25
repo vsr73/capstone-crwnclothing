@@ -3,18 +3,22 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
 import { UserProvider } from './components/contexts/user.context';
 import { BrowserRouter } from 'react-router-dom';
-import { ProductsProvider } from './components/contexts/product.context';
+import { Categoriesprovider } from './components/contexts/categories.context';
 import App from './App';
+import { CartProvider } from './components/contexts/cart.context';
 import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     
     <BrowserRouter>
       <UserProvider>
-        <ProductsProvider>
-          <App/>
-        </ProductsProvider>
+        <Categoriesprovider>
+          <CartProvider>
+            <App/>
+          </CartProvider>
+        </Categoriesprovider>
       </UserProvider>
     </BrowserRouter>
 

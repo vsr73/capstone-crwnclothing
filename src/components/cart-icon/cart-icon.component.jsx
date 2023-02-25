@@ -1,20 +1,21 @@
-import { useState } from 'react'
-import './cart-icon.styles.scss'
-import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg'
+import { useContext } from 'react'
+import {ShoppingIcon,CartIconContainer,ItemCount} from  './cart-icon.styles'
+// import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg'
+import { CartContext } from '../contexts/cart.context'
 import CartDropDown from '../cart-dropdown/cart-dropdown.components'
 const CartIcon=()=>{
-    
-    const [dropDownStatus,setDropDownStatus]=useState(true)
+    const {isCartOpen,setIsCartOpen,cartCount}=useContext(CartContext)
+    // const [dropDownStatus,setDropDownStatus]=useState(true)
     const toggleDropDown=()=>{
-        setDropDownStatus(!dropDownStatus)
+        setIsCartOpen(!isCartOpen)
       }
     return (
         <div>
-            <div className='cart-icon-container'>
+            <CartIconContainer>
                 <ShoppingIcon onClick={toggleDropDown} className='shopping-icon'/>
-                <span className='item-count'>0</span>
-            </div>
-            {dropDownStatus ? (<CartDropDown/>): (<></>)}
+                <ItemCount className='item-count'>{cartCount}</ItemCount>
+            </CartIconContainer>
+            {isCartOpen ? (<CartDropDown/>): (<></>)}
         </div>
           
             

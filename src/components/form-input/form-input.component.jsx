@@ -1,12 +1,14 @@
-import './form-input.sytles.scss';
+import {FormInputLabel,Group,Input} from  './form-input.sytles';
 
 const FormInput=({label,...otherProps})=>{
         return(
-        <div className='group'>
-            <input className="form-input" {...otherProps} />
-            <label className={`${otherProps.value.length ? 'shrink':''} form-input-label`}>{label}</label>
+        <Group>
+            <Input {...otherProps} />
+            <FormInputLabel shrink={otherProps.value.length}>
+                {label}
+            </FormInputLabel>
             {/* <input className="form-input" {...otherProps} /> */}
-        </div>
+        </Group>
     )
 }
 

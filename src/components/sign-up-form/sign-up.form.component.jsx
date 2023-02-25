@@ -43,7 +43,6 @@ const SignUpForm=()=>{
                 
             // const user=await createUserDocumentFromAuth(response.user,{displayName})
             resetFormFields();
-            // console.log('magic with the sign up user',user)
             
         }
 
