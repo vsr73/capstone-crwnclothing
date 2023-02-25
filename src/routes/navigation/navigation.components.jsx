@@ -6,7 +6,6 @@ import {NavigationContainer} from './navigation.styles.jsx'
 import { SignOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import { LogoContainer,NavLinks,NavLink } from './navigation.styles.jsx';
-import CartDropDown from '../../components/cart-dropdown/cart-dropdown.components';
 const Navigation=()=>{
   const {currentUser}=useContext(Usercontext)
   // const {}=use
