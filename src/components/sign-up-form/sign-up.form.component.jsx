@@ -3,7 +3,7 @@ import FormInput from "../form-input/form-input.component";
 // import {signInWithGooglePopup} from '../../utils/firebase/firebase.utils'
 // import {auth,createUserDocumentFromAuth,createAuthrWithUserEmailAndPassword} from '../../utils/firebase/firebase.utils'
 // import { Usercontext } from "../contexts/user.context";
-import { createAuthrWithUserEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
+import { createAuthrWithUserEmailAndPassword } from "../../utils/firebase/firebase.utils";
 import Button from "../buttons/buttons.component";
 import './sign-up.styles.scss'
 const defaultFormFields={
@@ -34,7 +34,7 @@ const SignUpForm=()=>{
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
-        if (password==confirmPassword)
+        if (password===confirmPassword)
         {
             try 
             {
