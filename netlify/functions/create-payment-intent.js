@@ -1,6 +1,5 @@
-const { event } = require('firebase-functions/lib/providers/analytics')
 
-require('dotenv').config()
+// require('dotenv').config()
 const stripe=require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 exports.handler=async(event)=>{
