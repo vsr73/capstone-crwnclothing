@@ -9,6 +9,7 @@
     display: grid;
     grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr ;
     column-gap: 20px;
+    
     height: auto;
     border: none;
     // row-gap: 50px;
@@ -19,4 +20,5 @@
     font-size: 38px;
     text-align: center;
     margin: 0;
+    margin-bottom: 10px;
 }

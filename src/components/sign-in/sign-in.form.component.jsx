@@ -3,13 +3,15 @@ import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button,{Button_Type_Classes} from "../buttons/buttons.component";
 import './sign-in.styles.scss'
-import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
-import { SignInAuthrWithUserEmailAndPassword } from "../../utils/firebase/firebase.utils";
+import { useDispatch } from "react-redux";
+import { googleSignInStart,emailSignInStart } from "../../store/user/user.action";
+import { SignInAuthWithUserEmailAndPassword } from "../../utils/firebase/firebase.utils";
 const defaultFormFields={
     email:'',
     password:'',
 }
 const SignInForm=()=>{
+    const dispatch=useDispatch()
     // const {setCurrentUser}=useContext(Usercontext)
     const [formFields,setFormFields]=useState(defaultFormFields);
     
@@ -22,8 +24,8 @@ const SignInForm=()=>{
     }
 
     const signInWithGoogle=async()=>{
-        const {user}=await signInWithGooglePopup();
-        alert(`Signed in as ${user.displayName}`)
+        dispatch(googleSignInStart())
+        // alert(`Signed in as ${user.displayName}`)
         
         // const userRefDoc=createUserDocumentFromAuth(user);
         // setCurrentUser(user)
@@ -38,7 +40,8 @@ const SignInForm=()=>{
         
             try 
             {
-                const user=await SignInAuthrWithUserEmailAndPassword(email,password)
+                // const user=await SignInAuthWithUserEmailAndPassword(email,password)
+                dispatch(emailSignInStart(email,password))
                 // setCurrentUser(user)
                 
             // await createUserDocumentFromAuth(response.user,{displayName})
@@ -89,7 +92,7 @@ const SignInForm=()=>{
                     />
                 <div className="buttons-container">
     
-                    <Button  type='submit'>Sign In </Button>
+                    <Button  type='submit' >Sign In </Button>
     
                     <Button type='button' buttonType={Button_Type_Classes.google}  onClick={signInWithGoogle}> Google Sign In </Button>
                 </div>

@@ -4,22 +4,22 @@ import { CartDropDownContainer,EmptyMessage,CartItems } from './cart-dropdown.st
 import Button from '../buttons/buttons.component';
 import CartItem from '../cart-item/cart-item.component';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { CartContext } from '../contexts/cart.context';
 import { useNavigate } from 'react-router-dom'
+import { selectCartItems } from '../../store/cartItems/cartItems.selector';
+import { useSelector } from 'react-redux';
 const CartDropDown=()=>{
     const navigate=useNavigate()
     const checkOutHandler=()=>{
         navigate('/checkout')
     }
-    const {cartItems}=useContext(CartContext)
-    const cartItem={name:'jeans',quantity:2}
+    // const {cartItems}=useContext(CartContext)
+    const cartItems=useSelector(selectCartItems)
     return(            
         <CartDropDownContainer>
             <CartItems>
 
                 {
-                    cartItems.length ? (
+                    cartItems && cartItems.length ? (
                         cartItems.map((item)=>(
                             <CartItem key={item.id} cartItem={item}/>
                         )
@@ -33,7 +33,7 @@ const CartDropDown=()=>{
             </CartItems>
             
             <Link to='/checkout'>
-            <Button  onClick={() =>( navigate('/checkout'))}>CheckOut</Button>
+            <Button  onClick={checkOutHandler}>CheckOut</Button>
             </Link>
         </CartDropDownContainer>
     )

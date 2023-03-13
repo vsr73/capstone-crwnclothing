@@ -1,30 +1,39 @@
+import { useDispatch, useSelector } from 'react-redux';
 
-import Button,{Button_Type_Classes} from '../buttons/buttons.component'
-import './product-card.styles.scss'
-import { useContext } from 'react'
-import { CartContext } from '../contexts/cart.context'
-const ProductCard=({product})=>{
-    const {name,price,imageUrl}=product
-    const {addCartItems}=useContext(CartContext)
-    const addProductToCart=()=>{
-        addCartItems(product)
-    }
-    return (
+import { selectCartItems } from '../../store/cartItems/cartItems.selector';
+import { addItemToCart } from '../../store/cartItems/cartItems.action';
 
-        <div className="product-card-container">
-            <img src={imageUrl} alt={name}/>
-            <div className="footer">
-                <span className="name">{name}</span>
-                <span className="price">{price}</span>
-            </div>
-            {/* {products.map((product)=>{
-                return (
-                    <ProductCard key={product.id} product={product}/>
-                )
-            })} */}
-            <Button buttonType={Button_Type_Classes.inverted} onClick={addProductToCart}>add to card</Button>
-        </div>
-    )
-}
+import Button from '../buttons/buttons.component';
+import { Button_Type_Classes } from '../buttons/buttons.component';
+import {
+  ProductCartContainer,
+  Footer,
+  Name,
+  Price,
+} from './product-card.styles';
 
-export default ProductCard
+const ProductCard = ({ product }) => {
+  const { name, price, imageUrl } = product;
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+
+  return (
+    <ProductCartContainer>
+      <img src={imageUrl} alt={`${name}`} />
+      <Footer>
+        <Name>{name}</Name>
+        <Price>{price}</Price>
+      </Footer>
+      <Button
+        buttonType={Button_Type_Classes.inverted}
+        onClick={addProductToCart}
+      >
+        Add to card
+      </Button>
+    </ProductCartContainer>
+  );
+};
+
+export default ProductCard;

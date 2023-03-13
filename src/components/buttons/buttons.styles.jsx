@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
+import { SpinnerContainer } from "../spinner/spinner.styles";
 export const BaseButton=styled.button`
 min-width: 165px;
-width: auto;
+width: inherit;
 height: 50px;
 letter-spacing: 0.5px;
 line-height: 50px;
@@ -17,6 +17,7 @@ border: none;
 cursor: pointer;
 display: flex;
 justify-content: center;
+align-items:center;
 font-family: 'Poppins', sans-serif;
 &:hover {
   background-color: white;
@@ -95,4 +96,9 @@ border: 1px solid black;
 //       }
 //     }
 //   }
-  
+
+export const ButtonSpinner=styled(SpinnerContainer)`
+width:10px,
+height:10px;
+padding:5px;
+`

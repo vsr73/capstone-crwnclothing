@@ -1,20 +1,21 @@
 import './checkout-item.styles.scss'
-import { CartContext } from '../contexts/cart.context'
-import { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeItemFromCart,addItemToCart,clearItemFromCart } from '../../store/cartItems/cartItems.action'
+import { selectCartItems } from '../../store/cartItems/cartItems.selector'
 const CheckOutItem=({cartItem})=>{
+    const dispatch=useDispatch()
     const {name,imageUrl,price,quantity}=cartItem
-    
-    const {clearItemFromCart,removeItemFromCart,addCartItems}=useContext(CartContext)
+    const cartItems=useSelector(selectCartItems)
     const clearCartItemHandler=()=>{
-        clearItemFromCart(cartItem)
+        dispatch(clearItemFromCart(cartItems,cartItem))
     }
 
     const removeCartItemHandler=()=>{
-        removeItemFromCart(cartItem)
+        dispatch(removeItemFromCart(cartItems,cartItem))
     }
 
     const addItemHandler=()=>{
-        addCartItems(cartItem)
+        dispatch(addItemToCart(cartItems,cartItem))
     }
     return (
         <div key={cartItem.id} className='checkout-item-container '>
@@ -28,7 +29,6 @@ const CheckOutItem=({cartItem})=>{
                 <div className="arrow" onClick={removeCartItemHandler}>&#10094;</div>
                 <span className="value">{quantity}</span>
                 <div className="arrow" onClick={addItemHandler}> &#10095;</div>
-               
                 </span>
             <span className='price'>${price}</span>
             <div className='remove-button' onClick={clearCartItemHandler}>&#10005;</div>

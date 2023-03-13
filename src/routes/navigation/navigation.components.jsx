@@ -1,13 +1,21 @@
-import { Fragment,useContext, useState } from 'react';
+import { Fragment } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import {ReactComponent as CrownLogo} from '../../assets/crown.svg'
-import { Usercontext } from '../../components/contexts/user.context';
+import { useSelector } from 'react-redux';
 import {NavigationContainer} from './navigation.styles.jsx'
-import { SignOutUser } from '../../utils/firebase/firebase.utils';
+import { signOutStart } from '../../store/user/user.action';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import { LogoContainer,NavLinks,NavLink } from './navigation.styles.jsx';
+import { selectCurrentUser } from '../../store/user/user.selector';
+import { useDispatch } from 'react-redux';
 const Navigation=()=>{
-  const {currentUser}=useContext(Usercontext)
+  // const {currentUser}=useContext(Usercontext)
+  const dispatch=useDispatch()
+  const handleSignOut=()=>{
+    console.log('thum ek fruit hai',signOutStart)
+    dispatch(signOutStart())
+  }
+  const currentUser=useSelector(selectCurrentUser)
   // const {}=use
  
     return(
@@ -25,7 +33,7 @@ const Navigation=()=>{
 
                 {
                   currentUser ?  (
-                  <NavLink onClick={SignOutUser}>
+                  <NavLink onClick={handleSignOut}>
                       SIGN OUT
                   </NavLink>
               ):(
